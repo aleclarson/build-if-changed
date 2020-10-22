@@ -23,7 +23,7 @@ Build your packages only if they changed since the last build.
 1. Install the package:
 
 ```sh
-yarn add build-if-changed -D
+yarn add @bbitgmbh/build-if-changed -D
 ```
 
 2. Edit your `package.json` module to customize the behavior:
