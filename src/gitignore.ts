@@ -41,7 +41,9 @@ export class GitIgnore {
           }
         } else if (fs.isFile(path)) {
           const lines = readLines(path).filter(line => line && line[0] !== '#')
-          match = createMatcher(lines, glob => join(dir, glob))
+          match = createMatcher(lines, glob =>
+            join(dir, glob).replace(/\\/g, '/')
+          )
           this.globTree[pathId] = match || false
           if (match && match(file, name)) {
             return true

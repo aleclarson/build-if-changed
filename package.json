@@ -1,6 +1,6 @@
 {
-  "name": "build-if-changed",
-  "version": "1.5.5",
+  "name": "@bbitgmbh/build-if-changed",
+  "version": "1.5.6",
   "description": "Run build scripts only when files changed",
   "license": "MIT",
   "main": "lib/index.js",
@@ -14,8 +14,7 @@
     "help.txt"
   ],
   "scripts": {
-    "build": "tsc -p .",
-    "prepublishOnly": "yarn build"
+    "build": "tsc -p ."
   },
   "dependencies": {
     "ansi-256-colors": "^1.1.0",
@@ -35,16 +34,17 @@
     "pretty-quick": "^1.11.0",
     "typescript": "^3.5.1"
   },
-  "author": "Alec Larson",
+  "author": "Roger Jaggi",
   "contributors": [
-    "Michel Weststrate"
+    "Michel Weststrate",
+    "Alec Larson"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aleclarson/build-if-changed.git"
+    "url": "git+https://github.com/bbitgmbh/build-if-changed.git"
   },
-  "homepage": "https://github.com/aleclarson/build-if-changed#readme",
+  "homepage": "https://github.com/bbitgmbh/build-if-changed#readme",
   "bugs": {
-    "url": "https://github.com/aleclarson/build-if-changed/issues"
+    "url": "https://github.com/bbitgmbh/build-if-changed/issues"
   }
 }
