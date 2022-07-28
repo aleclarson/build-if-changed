@@ -250,8 +250,16 @@ function getLines(data: string) {
     .split(/\r?\n/)
 }
 
-function getRunner(root: string) {
-  return fs.isFile(join(root, 'package-lock.json')) ? 'npm' : 'yarn'
+function getRunner(directory: string) {
+  if (fs.isFile(join(directory, 'package-lock.json'))) {
+    return 'npm'
+  } else if (fs.isFile(join(directory, 'yarn.lock'))) {
+    return 'yarn'
+  } else if (fs.isFile(join(directory, 'pnpm-lock.yaml'))) {
+    return 'pnpm'
+  }
+
+  return getRunner(join(directory, '..'))
 }
 
 type Falsy = null | undefined | false | 0 | ''
