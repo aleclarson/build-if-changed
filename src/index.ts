@@ -4,6 +4,7 @@ import fs = require('saxon/sync')
 import spawn from './spawn'
 import checksum from './checksum'
 import createLog from './log'
+import * as os from 'os'
 
 const PKG_JSON = 'package.json'
 const CACHE_NAME = '.bic_cache'
@@ -250,8 +251,23 @@ function getLines(data: string) {
     .split(/\r?\n/)
 }
 
-function getRunner(root: string) {
-  return fs.isFile(join(root, 'package-lock.json')) ? 'npm' : 'yarn'
+const runnersByLockfile = {
+  'package-lock.json': 'npm',
+  'pnpm-lock.yaml': 'pnpm',
+  'yarn.lock': 'yarn',
+}
+
+function getRunner(directory: string) {
+  for (const file of fs.list(directory)) {
+    const runner = runnersByLockfile[file]
+    if (runner) {
+      return runner
+    }
+  }
+  if (directory !== os.homedir()) {
+    return getRunner(dirname(directory))
+  }
+  throw Error('No lockfile was found')
 }
 
 type Falsy = null | undefined | false | 0 | ''
